@@ -17,7 +17,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload,
+        user: action.payload.user_id,
+        token: action.payload.token,
       };
     case "LOGOUT":
       localStorage.clear();
@@ -47,6 +48,10 @@ const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   React.useEffect(() => {
+    if (initialState.role) {
+      sdk.check(initialState.role);
+    }
+
     //TODO
   }, []);
 
