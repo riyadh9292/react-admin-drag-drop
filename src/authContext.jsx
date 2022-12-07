@@ -19,6 +19,7 @@ const reducer = (state, action) => {
         isAuthenticated: true,
         user: action.payload.user_id,
         token: action.payload.token,
+        role: action.payload.role,
       };
     case "LOGOUT":
       localStorage.clear();
@@ -49,8 +50,10 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     if (initialState.role) {
+      console.log("role available");
       sdk.check(initialState.role);
     }
+    console.log("role not available");
 
     //TODO
   }, []);

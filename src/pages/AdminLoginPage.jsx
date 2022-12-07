@@ -34,10 +34,12 @@ const AdminLoginPage = () => {
 
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("role", JSON.stringify(role));
+    console.log(role, "role");
     showToast(dispatch, "logged in successfull");
+    // console.log({ user_id: user_id, token: token, role: role });
     authDispatch({
       type: "LOGIN",
-      payload: { user_id: user_id, token: token },
+      payload: { user_id: user_id, token: token, role: role },
     });
 
     // console.log(token);
@@ -47,7 +49,7 @@ const AdminLoginPage = () => {
     //   .catch((err) => console.log(err));
     //TODO
   };
-  console.log(state, "state");
+  // console.log(state, "state");
   // console.log(authDispatch, "authDispatch");
 
   return (
