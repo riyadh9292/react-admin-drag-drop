@@ -35,9 +35,9 @@ const AdminLoginPage = () => {
 
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("role", JSON.stringify(role));
-    // console.log(role, "role");
+
     showToast(dispatch, "logged in successfull");
-    // console.log({ user_id: user_id, token: token, role: role });
+
     authDispatch({
       type: "LOGIN",
       payload: { user_id: user_id, token: token, role: role },
@@ -45,16 +45,7 @@ const AdminLoginPage = () => {
     if (token) {
       navigate("/admin/dashboard");
     }
-
-    // console.log(token);
-    // console.log(token, "token");
-    // token
-    //   .then((data) => console.log("chaining", data))
-    //   .catch((err) => console.log(err));
-    //TODO
   };
-  // console.log(state, "state");
-  // console.log(authDispatch, "authDispatch");
 
   return (
     <div className="w-full max-w-xs mx-auto">

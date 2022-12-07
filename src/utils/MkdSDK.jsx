@@ -46,8 +46,9 @@ export default function MkdSDK() {
     const header = {
       "Content-Type": "application/json",
       "x-project": base64Encode,
-      Authorization: "Bearer " + localStorage.getItem("token"),
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     };
+    console.log(header, "header");
 
     switch (method) {
       case "GET":
@@ -78,11 +79,11 @@ export default function MkdSDK() {
           payload.limit = 10;
         }
         const paginateResult = await fetch(
-          this._baseurl + `/v1/api/rest/${this._table}/${method}`,
+          this._baseurl + `/v1/api/rest/${this._table}/paginate`,
           {
             method: "post",
             headers: header,
-            body: JSON.stringify(payload),
+            body: JSON.stringify({ payload: {}, payload }),
           }
         );
         const jsonPaginate = await paginateResult.json();

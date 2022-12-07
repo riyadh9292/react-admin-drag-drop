@@ -50,10 +50,9 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     if (initialState.role) {
-      console.log("role available");
       sdk.check(initialState.role);
     }
-    console.log("role not available");
+    // console.log("role not available");
 
     //TODO
   }, []);
