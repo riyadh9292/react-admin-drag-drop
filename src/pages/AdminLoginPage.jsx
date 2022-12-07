@@ -6,6 +6,7 @@ import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
 import { GlobalContext, showToast } from "../globalContext";
+// import { Navigate } from "react-router-dom";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -34,13 +35,16 @@ const AdminLoginPage = () => {
 
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("role", JSON.stringify(role));
-    console.log(role, "role");
+    // console.log(role, "role");
     showToast(dispatch, "logged in successfull");
     // console.log({ user_id: user_id, token: token, role: role });
     authDispatch({
       type: "LOGIN",
       payload: { user_id: user_id, token: token, role: role },
     });
+    if (token) {
+      navigate("/admin/dashboard");
+    }
 
     // console.log(token);
     // console.log(token, "token");
