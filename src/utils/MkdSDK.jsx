@@ -101,6 +101,16 @@ export default function MkdSDK() {
   };
 
   this.check = async function (role) {
+    return fetch("https://reacttask.mkdlabs.com/v2/api/lambda/check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-project":
+          "cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==",
+      },
+      body: JSON.stringify({ role: role }),
+    }).then((data) => data.json());
+    // return role === "admin" ? true : false;
     //TODO
   };
 

@@ -29,6 +29,8 @@ const AdminLoginPage = () => {
     // console.log(data);
     let sdk = new MkdSDK();
     const { token } = await sdk.login(data.email, data.password);
+
+    localStorage.setItem("token", JSON.stringify(token));
     // console.log(token);
     // console.log(token, "token");
     // token
