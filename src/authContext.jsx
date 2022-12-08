@@ -49,11 +49,18 @@ const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   React.useEffect(() => {
-    if (initialState.role) {
-      sdk.check(initialState.role);
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    if (token && role) {
+      dispatch({
+        type: "LOGIN",
+        payload: { token: token, role: role },
+      });
     }
+    // if (initialState.role) {
+    //   sdk.check(initialState.role);
+    // }
     // console.log("role not available");
-
     //TODO
   }, []);
 

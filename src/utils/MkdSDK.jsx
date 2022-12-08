@@ -23,7 +23,7 @@ export default function MkdSDK() {
       headers: {
         "Content-Type": "application/json",
         "x-project":
-          "cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==",
+          "cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==",
       },
       body: JSON.stringify({ email, password, role }),
     }).then((data) => data.json());
@@ -45,10 +45,10 @@ export default function MkdSDK() {
   this.callRestAPI = async function (payload, method) {
     const header = {
       "Content-Type": "application/json",
-      "x-project": base64Encode,
+      "x-project":
+        "cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     };
-    console.log(header, "header");
 
     switch (method) {
       case "GET":
@@ -79,13 +79,15 @@ export default function MkdSDK() {
           payload.limit = 10;
         }
         const paginateResult = await fetch(
-          this._baseurl + `/v1/api/rest/${this._table}/paginate`,
+          this._baseurl + `/v1/api/rest/${this._table}/${method}`,
           {
             method: "post",
             headers: header,
-            body: JSON.stringify({ payload: {}, payload }),
+            body: JSON.stringify({ payload }),
           }
-        );
+        )
+          .then((res) => console.log(res, "res"))
+          .catch((err) => console.log(err));
         const jsonPaginate = await paginateResult.json();
 
         if (paginateResult.status === 401) {
@@ -102,18 +104,19 @@ export default function MkdSDK() {
   };
 
   this.check = async function (role) {
-    const token = localStorage.getItem("token");
-    console.log("mkdcomponent works", role);
-    return fetch("https://reacttask.mkdlabs.com/v2/api/lambda/check", {
+    return fetch("https://reacttask.mkdlabs.com/v2/api/lambda/check/", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         "Content-Type": "application/json",
+
         "x-project":
-          "cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==",
-        Authorization: `Bearer ${token}`,
+          "cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==",
       },
-      body: JSON.stringify({ role: role }),
-    }).then((data) => data.json());
+      body: JSON.stringify({ role }),
+    })
+      .then((data) => data.json())
+      .catch((err) => console.log("check error", err));
     // return role === "admin" ? true : false;
     //TODO
   };

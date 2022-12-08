@@ -33,17 +33,19 @@ const AdminLoginPage = () => {
     let sdk = new MkdSDK();
     const { token, role, user_id } = await sdk.login(data.email, data.password);
 
-    localStorage.setItem("token", JSON.stringify(token));
-    localStorage.setItem("role", JSON.stringify(role));
-
-    showToast(dispatch, "logged in successfull");
-
-    authDispatch({
-      type: "LOGIN",
-      payload: { user_id: user_id, token: token, role: role },
-    });
     if (token) {
+      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("role", JSON.stringify(role));
+
+      showToast(dispatch, "logged in successfull");
+
+      authDispatch({
+        type: "LOGIN",
+        payload: { user_id: user_id, token: token, role: role },
+      });
       navigate("/admin/dashboard");
+    } else {
+      showToast(dispatch, "Failed");
     }
   };
 
