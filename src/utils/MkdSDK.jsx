@@ -83,11 +83,10 @@ export default function MkdSDK() {
           {
             method: "post",
             headers: header,
-            body: JSON.stringify({ payload: {}, page: 1, limit: 10 }),
+            body: JSON.stringify({ ...payload }),
           }
-        )
-          .then((res) => console.log(res, "res"))
-          .catch((err) => console.log(err));
+        );
+
         const jsonPaginate = await paginateResult.json();
 
         if (paginateResult.status === 401) {

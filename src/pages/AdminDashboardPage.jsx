@@ -24,9 +24,11 @@ const AdminDashboardPage = () => {
       role || JSON.parse(localStorage.getItem("role"))
     );
     const data = await sdk.callRestAPI(
-      { payload: {}, page: 1, limit: 10 },
+      { payload: {}, page: pageNumber, limit: 10 },
       "PAGINATE"
     );
+    setLeaderboardData(data?.list);
+    setTotalPage(data?.num_pages);
     console.log(data, "data");
 
     // setLeaderboardData(data);
@@ -37,7 +39,7 @@ const AdminDashboardPage = () => {
 
   useEffect(() => {
     getAllData();
-  }, []);
+  }, [pageNumber]);
 
   return (
     <>
@@ -54,7 +56,7 @@ const AdminDashboardPage = () => {
         </button>
       </div>
       <div className="text-white w-full mt-20">
-        <TestTable />
+        <TestTable data={leaderBoardData} />
         {/* <table className="table-auto">
           <thead>
             <tr>
@@ -101,8 +103,22 @@ const AdminDashboardPage = () => {
             pageNumber !== 1 ? " justify-between" : " justify-end"
           } mt-20`}
         >
-          {pageNumber !== 1 && <button>back</button>}
-          {totalPage > pageNumber && <button>next</button>}
+          {pageNumber !== 1 && (
+            <button
+              onClick={() => setPageNumber((prev) => prev - 1)}
+              className="text-black bg-[#9BFF00] py-2 px-4"
+            >
+              back
+            </button>
+          )}
+          {totalPage > pageNumber && (
+            <button
+              onClick={() => setPageNumber((prev) => prev + 1)}
+              className="text-black bg-[#9BFF00] py-2 px-4"
+            >
+              next
+            </button>
+          )}
         </div>
       </div>
     </>

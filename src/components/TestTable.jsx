@@ -6,6 +6,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import update from "immutability-helper";
 
 import makeData from "./makeData.js";
+import { useEffect } from "react";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -38,6 +39,11 @@ const Styles = styled.div`
 
 const Table = ({ columns, data }) => {
   const [records, setRecords] = React.useState(data);
+  console.log(data, "data");
+
+  useEffect(() => {
+    setRecords(data);
+  }, [data]);
 
   const getRowId = React.useCallback((row) => {
     return row.id;
@@ -45,7 +51,7 @@ const Table = ({ columns, data }) => {
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
-      data: records,
+      data: records || data,
       columns,
       getRowId,
     });
@@ -153,6 +159,7 @@ const Row = ({ row, index, moveRow }) => {
 
   preview(drop(dropRef));
   drag(dragRef);
+  //   console.log(row.cells[0], "row.cells");
 
   return (
     <tr ref={dropRef} style={{ opacity }}>
@@ -164,52 +171,53 @@ const Row = ({ row, index, moveRow }) => {
   );
 };
 
-const TestTable = () => {
+const TestTable = ({ data }) => {
   const columns = React.useMemo(
     () => [
+      //   {
+      //     Header: "ID",
+      //     accessor: "id",
+      //   },
       {
-        Header: "ID",
-        accessor: "id",
+        Header: "Title",
+        accessor: "title",
+      },
+
+      {
+        // Header: "Author",
+        // columns: [
+        //   {
+        Header: "Author",
+        accessor: "username",
+        //   },
+        //   {
+        //     Header: "Visits",
+        //     accessor: "visits",
+        //   },
+        //   {
+        //     Header: "Status",
+        //     accessor: "status",
+        //   },
+        //   {
+        //     Header: "Profile Progress",
+        //     accessor: "progress",
+        //   },
+        // ],
       },
       {
-        Header: "Name",
-        columns: [
-          {
-            Header: "First Name",
-            accessor: "firstName",
-          },
-          {
-            Header: "Last Name",
-            accessor: "lastName",
-          },
-        ],
-      },
-      {
-        Header: "Info",
-        columns: [
-          {
-            Header: "Age",
-            accessor: "age",
-          },
-          {
-            Header: "Visits",
-            accessor: "visits",
-          },
-          {
-            Header: "Status",
-            accessor: "status",
-          },
-          {
-            Header: "Profile Progress",
-            accessor: "progress",
-          },
-        ],
+        // Header: "Most Liked",
+        // columns: [
+        //   {
+        Header: "Liked",
+        accessor: "like",
+        //   },
+        // ],
       },
     ],
     []
   );
 
-  const data = React.useMemo(() => makeData(20), []);
+  //   const data = React.useMemo(() => makeData(20), []);
 
   return (
     <Styles>
