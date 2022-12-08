@@ -5,7 +5,7 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import update from "immutability-helper";
 
-import makeData from "./makeData.js";
+// import makeData from "./makeData.js";
 import { useEffect } from "react";
 
 const Styles = styled.div`
@@ -165,6 +165,9 @@ const Row = ({ row, index, moveRow }) => {
     <tr ref={dropRef} style={{ opacity }}>
       <td ref={dragRef}>move</td>
       {row.cells.map((cell) => {
+        {
+          console.log(cell.render("Cell"), "cell");
+        }
         return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
       })}
     </tr>

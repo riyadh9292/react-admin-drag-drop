@@ -13,7 +13,6 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      //TODO
       return {
         ...state,
         isAuthenticated: true,
@@ -57,12 +56,6 @@ const AuthProvider = ({ children }) => {
         payload: { token: token, role: role },
       });
     }
-    // if (initialState.role) {
-    //   sdk.check(initialState.role);
-    //   console.log("role available");
-    // }
-    // console.log("role not available");
-    //TODO
   }, []);
 
   return (

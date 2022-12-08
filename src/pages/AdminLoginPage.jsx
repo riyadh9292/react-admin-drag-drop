@@ -6,7 +6,6 @@ import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
 import { GlobalContext, showToast } from "../globalContext";
-// import { Navigate } from "react-router-dom";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -29,7 +28,6 @@ const AdminLoginPage = () => {
   });
 
   const onSubmit = async (data) => {
-    // console.log(data);
     let sdk = new MkdSDK();
     const { token, role, user_id } = await sdk.login(data.email, data.password);
 

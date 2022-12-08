@@ -67,47 +67,6 @@ const AdminDashboardPage = () => {
           <TestTable data={leaderBoardData} />
         )}
 
-        {/* <table className="table-auto">
-          <thead>
-            <tr>
-              <th className="w-[30%]">Title</th>
-              <th className="w-[50%] text-left pl-10">Author</th>
-              <th className="w-[20%] text-left">Most liked</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md ">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-            <tr className="px-4 py-2 border border-[#e6e6e6] rounded-md">
-              <LeaderBoardCard />
-            </tr>
-          </tbody>
-        </table> */}
         <div
           className={`w-full flex items-center ${
             pageNumber !== 1 ? " justify-between" : " justify-end"
