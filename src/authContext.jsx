@@ -59,6 +59,7 @@ const AuthProvider = ({ children }) => {
     }
     // if (initialState.role) {
     //   sdk.check(initialState.role);
+    //   console.log("role available");
     // }
     // console.log("role not available");
     //TODO

@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import MkdSDK from "../utils/MkdSDK";
 import { AuthContext } from "../authContext";
 import { useNavigate } from "react-router-dom";
-import LeaderBoardCard from "../components/LeaderBoardCard";
 import TestTable from "../components/TestTable";
 
 const AdminDashboardPage = () => {
@@ -13,23 +12,30 @@ const AdminDashboardPage = () => {
   const { state, dispatch, role } = React.useContext(AuthContext);
 
   const [leaderBoardData, setLeaderboardData] = useState([]);
-  const [pageSize, setPageSize] = useState(10);
+  const [loading, setLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPage, setTotalPage] = useState(10);
 
   const getAllData = async () => {
+    setLoading(true);
     let sdk = new MkdSDK();
     sdk._table = "video";
     const check = await sdk.check(
       role || JSON.parse(localStorage.getItem("role"))
     );
-    const data = await sdk.callRestAPI(
-      { payload: {}, page: pageNumber, limit: 10 },
-      "PAGINATE"
-    );
-    setLeaderboardData(data?.list);
-    setTotalPage(data?.num_pages);
-    console.log(data, "data");
+
+    if (check?.message === "OK") {
+      const data = await sdk.callRestAPI(
+        { payload: {}, page: pageNumber, limit: 10 },
+        "PAGINATE"
+      );
+      setLeaderboardData(data?.list);
+      setTotalPage(data?.num_pages);
+      setLoading(false);
+    } else {
+      navigate("/admin/login");
+      setLoading(false);
+    }
 
     // setLeaderboardData(data);
   };
@@ -47,7 +53,6 @@ const AdminDashboardPage = () => {
         <h1 className="text-3xl font-bold">APP</h1>
         <button
           onClick={() => {
-            console.log("logging yout");
             dispatch({ type: "LOGOUT" });
           }}
           className="text-black bg-[#9BFF00] rounded-[40px] p-[14px]"
@@ -56,7 +61,12 @@ const AdminDashboardPage = () => {
         </button>
       </div>
       <div className="text-white w-full mt-20">
-        <TestTable data={leaderBoardData} />
+        {loading ? (
+          <p className="text-white text-3xl font-bold text-center">Loading</p>
+        ) : (
+          <TestTable data={leaderBoardData} />
+        )}
+
         {/* <table className="table-auto">
           <thead>
             <tr>

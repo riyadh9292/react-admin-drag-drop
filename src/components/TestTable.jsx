@@ -14,6 +14,7 @@ const Styles = styled.div`
   table {
     border-spacing: 0;
     border: 1px solid black;
+    width: 100%;
 
     tr {
       :last-child {
@@ -39,7 +40,6 @@ const Styles = styled.div`
 
 const Table = ({ columns, data }) => {
   const [records, setRecords] = React.useState(data);
-  console.log(data, "data");
 
   useEffect(() => {
     setRecords(data);
@@ -71,7 +71,7 @@ const Table = ({ columns, data }) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <table {...getTableProps()}>
-        <thead>
+        <thead className="text-left font-semibold text-lg">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               <th></th>

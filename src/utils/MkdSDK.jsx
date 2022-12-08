@@ -27,8 +27,6 @@ export default function MkdSDK() {
       },
       body: JSON.stringify({ email, password, role }),
     }).then((data) => data.json());
-
-    //TODO
   };
 
   this.getHeader = function () {
@@ -116,8 +114,6 @@ export default function MkdSDK() {
     })
       .then((data) => data.json())
       .catch((err) => console.log("check error", err));
-    // return role === "admin" ? true : false;
-    //TODO
   };
 
   return this;
