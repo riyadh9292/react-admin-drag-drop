@@ -23,10 +23,11 @@ const AdminDashboardPage = () => {
     const check = await sdk.check(
       role || JSON.parse(localStorage.getItem("role"))
     );
-    // const data = await sdk.callRestAPI(
-    //   { payload: {}, page: 1, limit: 10 },
-    //   "PAGINATE"
-    // );
+    const data = await sdk.callRestAPI(
+      { payload: {}, page: 1, limit: 10 },
+      "PAGINATE"
+    );
+    console.log(data, "data");
 
     // setLeaderboardData(data);
   };

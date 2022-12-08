@@ -47,7 +47,7 @@ export default function MkdSDK() {
       "Content-Type": "application/json",
       "x-project":
         "cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
     };
 
     switch (method) {
@@ -83,7 +83,7 @@ export default function MkdSDK() {
           {
             method: "post",
             headers: header,
-            body: JSON.stringify({ payload }),
+            body: JSON.stringify({ payload: {}, page: 1, limit: 10 }),
           }
         )
           .then((res) => console.log(res, "res"))
